@@ -7,6 +7,7 @@ const UPDATE_COUNT_PAGE = 'UPDATE-COUNT-PAGE';
 const UPDATE_STATUS_LOAD = 'UPDATE-STATUS-LOAD';
 const UPDATE_PERSONAL_DATA = 'UPDATE-PERSONAL-DATA';
 const UPDATE_STATISTICS_BY_DATE = 'UPDATE-STATISTICS-BY-DATE';
+const UPDATE_FULL_NAME = 'UPDATE-FULL-NAME';
 
 
 const initialStatistic = {
@@ -20,6 +21,7 @@ const initialStatistic = {
     personalData: null,
     statisticsByDate: null,
     months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
+    fullName: {},
 
 }
 
@@ -38,7 +40,9 @@ const statisticReducer = (state = initialStatistic, action) => {
         case UPDATE_PERSONAL_DATA:
             return { ...state, personalData: action.personalData };
         case UPDATE_STATISTICS_BY_DATE: 
-            return { ...state, statisticsByDate: action.statisticsByDate };   
+            return { ...state, statisticsByDate: action.statisticsByDate };
+        case UPDATE_FULL_NAME:
+            return { ...state, fullName: action.fullName };   
         default:
             return state;    
     }
@@ -51,6 +55,7 @@ const updateCountPageAC = (numberPage) => ({type: UPDATE_COUNT_PAGE, numberPage}
 const updateStatusLoadAC = (status) => ({type: UPDATE_STATUS_LOAD, status});
 const updateStatisticsByDateAC = (statisticsByDate) => ({type: UPDATE_STATISTICS_BY_DATE, statisticsByDate});
 export const updatePersonalDataAC = (personalData) => ({type: UPDATE_PERSONAL_DATA, personalData});
+export const updateFullNameAC = (fullName) => ({type: UPDATE_FULL_NAME, fullName});
 
 export const getPortionUsersThunk = (countUsers, countPage) => {
     return async (dispatch) => {

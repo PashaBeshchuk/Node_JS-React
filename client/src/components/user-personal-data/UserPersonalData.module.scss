@@ -1,0 +1,42 @@
+.fullName {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    color: #1A1A1A;
+}
+
+.chartTitle {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    color: #1A1A1A;
+}
+.chartViews {
+    margin-top: 114px;
+}
+
+.dateFilter {
+    display: flex;
+    margin: 0 auto;
+    margin: 2% 0% 2% 40%;
+    position: relative;
+    &__from {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    &__to {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    &__button {
+        background: #3A80BA;
+        border: 1px solid #3A80BA;
+        color: white;
+        position: absolute;
+        left: 29%;
+        top: 30%;
+        font-weight: bold;
+    }
+}

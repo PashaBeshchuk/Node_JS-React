@@ -1,0 +1,50 @@
+.h1 {
+    font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        margin: 50px 0px 16px 0px;
+}
+.blockTable {
+    width: 85%;
+    margin: auto;
+    &__headTable {
+        background: #3A80BA;
+        color: white;
+        height: 40px;
+        font-size: 16px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+              
+    }
+    &__headTable > th {
+        border: 1px solid white;
+        &:first-child{
+            border-radius: 10px 0px 0px 0px;
+        }
+        &:last-child{
+            border-radius: 0px 10px 0px 0px;
+        }
+    }
+    &__trActive {
+        background: #F1F1F1;
+    }
+    &__trInactive {
+        background: #FBFBFB;
+    }
+}
+table {
+    width: 100%;
+}
+table {
+    border-spacing: 0;
+}
+table > tbody > tr > td { 
+    padding: 0 0 0 20px;
+    border-bottom: 0;
+    border-right: 1px solid white;  
+}
+table > tbody > tr {
+    color: #1A1A1A;
+}

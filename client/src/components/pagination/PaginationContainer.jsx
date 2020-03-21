@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import Pagination from './Pagination';
 import {  getPortionUsersThunk } from '../../redux/statistic-reducer';
 import { NavLink } from 'react-router-dom';
+import scss from './Pagination.module.scss'
 
 const PaginationContainer = (props) => {
     const { countAllUsers, countUsers, countPage, getPortionUsersThunk, paginationSize, load } = { ...props };
+
     const [ countActualPage, setCountActualPage ] = useState(1)
     const checkStateComponent = () => {
         if(load){
@@ -40,9 +42,13 @@ const PaginationContainer = (props) => {
         } 
     })
     const linkForpagonation = actualPages.map((page,key)=>{
-        return <span key={key}><NavLink exact onClick={updateActualUsers} to={`/Main/User-Statistics/${page}`}>{page}</NavLink></span>
+        return <span className={ countPage == page ? `${scss.selectedPage} ${scss.linkButton}` : `${scss.linkButton}`} key={key}>
+            <NavLink exact onClick={updateActualUsers}  to={`/Main/User-Statistics/${page}`}>
+                {page}
+            </NavLink>
+        </span>
     })
-    return <div>
+    return <div className={scss.pagination}>
         <Pagination pageData={ { countActualPage, linkForpagonation, firstPage, endPage, lastPage, setCountActualPage } }/>
     </div>    
 };

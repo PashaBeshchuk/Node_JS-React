@@ -1,28 +1,37 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import UserStatistic from './user-statistic/UserStatistic';
-import css from './UsersStatistics.module.css'
+import scss from './UsersStatistics.module.scss'
 import PaginationContainer from '../pagination/PaginationContainer';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
 
 const UsersStatistics = (props) => {
-    const { users, updatePersonalDataAC, usersStatistics } = { ...props }
+    const { users, updatePersonalDataAC, usersStatistics, fullName, updateFullNameAC } = { ...props };
     const [ redirectToPersonalPage, setRedirect ] = useState( false );
-    const [ fullName, setFullName ] = useState({name: '', surname: ''} );
-
+    let trActive = false;
     const goToNewPage = (usersStatistics, users) => {
-        setFullName({ name: users.first_name, surname: users.last_name })
-        updatePersonalDataAC(usersStatistics)
+        updateFullNameAC({ name: users.first_name, surname: users.last_name })
+        updatePersonalDataAC(usersStatistics);
         setRedirect(true);
     }
     const listUsers =  users.map((element,id)=>{
-        return <tr onClick={goToNewPage.bind(null, usersStatistics[id], users[id])} key={id}><UserStatistic {...element} /></tr>;
+        if(trActive) {
+            trActive = false;
+            return <tr className={scss.blockTable__trActive} onClick={goToNewPage.bind(null, usersStatistics[id], users[id])} key={id}><UserStatistic {...element} /></tr>;
+        } else {
+            trActive = true;
+            return <tr className={scss.blockTable__trInactive} onClick={goToNewPage.bind(null, usersStatistics[id], users[id])} key={id}><UserStatistic {...element} /></tr>;
+        }
+      
+        
     })
     if( redirectToPersonalPage ) return<Redirect to={`/Main/User-Statistic/${fullName.name}-${fullName.surname}`} />;
-    return <div className={css.body_for_table}>
-        Stats Page
-        <div className={css.blockTable}>
-            <span>Users Statistics</span>
+    return <div>
+        <Header/>
+        <div className={scss.blockTable}>
+            <div className={scss.h1}>Users Statistics</div>
             <table>
                 <tbody>
                     <TableHeader/>
@@ -30,12 +39,14 @@ const UsersStatistics = (props) => {
                 </tbody>
             </table>
             <PaginationContainer />
-        </div>  
-    </div>
+        </div>
+        <Footer/>  
+    </div> 
+    
 };
 
 const TableHeader = (props) => {
-    return <tr>
+    return <tr className={scss.blockTable__headTable}>
         <th>Id</th>
         <th>First name</th>
         <th>Last name</th>

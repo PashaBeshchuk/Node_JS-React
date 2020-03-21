@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import scss from './Main.module.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import text from './../../images/text.png'
 import footer from './../../images/footer.png'
 import back from './../../images/back.png'
 import headerImage from './../../images/header_image.png'
 
 const MainHeader = (props) => {
+    const [ redirectToUserStatisticsPage, setRedirect ] = useState( false );
+    const redirectInUserStatistics = () =>{
+        setRedirect(true); 
+    }
+    if(redirectToUserStatisticsPage) return <Redirect to={'/Main/User-Statistics'}/>;
     return <div>
          <div className={scss.blockHeader}>
             <div className={scss.headerImage}><img style={{width:'100%'}} src={headerImage}/></div>
@@ -22,8 +27,8 @@ const MainHeader = (props) => {
                     <p>Our design projects are fresh and simple and will benefit</p>
                     <p>your business greatly. Learn more about our work!</p>
                 </div>
-                <button className={scss.blockHeader__text__button}>
-                    <NavLink to='/Main/User-Statistics'>View UserStatistics</NavLink>
+                <button onClick={redirectInUserStatistics} className={scss.blockHeader__text__button}>
+                    View UserStatistics
                 </button>
             </div>
             <div>
