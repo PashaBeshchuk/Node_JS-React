@@ -1,6 +1,6 @@
 import React, { useState }  from 'react';
 import scss from './Main.module.scss';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import text from './../../images/text.png'
 import footer from './../../images/footer.png'
 import back from './../../images/back.png'

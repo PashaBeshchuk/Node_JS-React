@@ -28,10 +28,14 @@ const UsersStatistics = (props) => {
         
     })
     if( redirectToPersonalPage ) return<Redirect to={`/Main/User-Statistic/${fullName.name}-${fullName.surname}`} />;
-    return <div>
+    return <div className={scss.bodyForPageStatistics}>
         <Header/>
         <div className={scss.blockTable}>
-            <div className={scss.h1}>Users Statistics</div>
+            <div className={scss.h1}>
+                <SetTheNumberOfUsers {...props}/>
+                Users Statistics
+            </div>
+            
             <table>
                 <tbody>
                     <TableHeader/>
@@ -52,10 +56,31 @@ const TableHeader = (props) => {
         <th>Last name</th>
         <th>Email</th>
         <th>Gender</th>
-        <th>IP address</th>
+        <th>IP address</th> 
         <th>Total clicks</th>
         <th>Total page views</th>
     </tr>
 }
+
+const SetTheNumberOfUsers = (props) => {
+    const {updateCountUsers, getPortionUsersThunk, countPage } = { ...props };
+    const [countUsersOnPage, setCountUsersOnPage] = useState();
+    const sendValue = () => {
+        if(!countUsersOnPage) return 
+        if(Number(countUsersOnPage) > 50) {
+            alert('Maximum number of users 50 people');
+        } else {
+            updateCountUsers(countUsersOnPage);
+            getPortionUsersThunk(countUsersOnPage, countPage);
+            setCountUsersOnPage();
+        }
+    }
+
+    return <div className={scss.setCountUsers}>    
+        <div>Enter the number of users</div>
+        <input onChange={(event)=> setCountUsersOnPage(event.target.value)} value={countUsersOnPage} type='text'/>
+        <button onClick={sendValue}>Confirm</button>
+    </div>
+} 
 
 export default UsersStatistics;

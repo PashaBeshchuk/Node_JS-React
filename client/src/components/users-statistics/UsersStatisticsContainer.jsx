@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import UsersStatistics from './UsersStatistics';
 import { connect } from 'react-redux';
-import { getPortionUsersThunk, updatePersonalDataAC, updateFullNameAC } from '../../redux/statistic-reducer';
-
+import { getPortionUsersThunk, updatePersonalDataAC, updateFullNameAC, updateCountUsers } from '../../redux/statistic-reducer';
 
 const UsersStatisticContainer = (props) => {
     const { users, countUsers, countPage, getPortionUsersThunk } = { ...props }  
@@ -15,9 +14,9 @@ const UsersStatisticContainer = (props) => {
         
     }, [countPage])
     if (users) {
-        return <>
+        return <div>
             <UsersStatistics {...props} />
-        </>
+        </div>
     }
     return <></>
 }
@@ -32,4 +31,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getPortionUsersThunk, updatePersonalDataAC, updateFullNameAC })(UsersStatisticContainer)
+export default connect(mapStateToProps, { getPortionUsersThunk, updatePersonalDataAC, updateFullNameAC, updateCountUsers })(UsersStatisticContainer)

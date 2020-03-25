@@ -9,6 +9,7 @@ Runs in the server folder:
 
 ### `nodemon server`
 
+npm install --save-dev nodemon
 Start the server and will show the status of the server at a ticking moment.
 
 ### Run client

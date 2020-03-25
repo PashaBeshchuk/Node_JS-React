@@ -4,11 +4,8 @@ import {
     AreaChart,
     XAxis,
     YAxis,
-    CartesianGrid,
     Area,
-    Tooltip,
     ResponsiveContainer,
-    LabelList
   } from 'recharts';
 
 const userPersonalData = (props) => { 

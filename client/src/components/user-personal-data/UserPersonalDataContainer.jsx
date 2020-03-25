@@ -13,8 +13,9 @@ const userPersonalDataContainer = (props) => {
     const { personalData, statisticsByDate, months, fullName } = { ...props };
     if(!personalData) return <Redirect to={'/Main/User-Statistics'} />;
     const day = personalData[0].date.split('-');
-    const statisticsPeriod = `Statistics period: ${day[0]}, ${months[day[1]]} ` 
+    const statisticsPeriod = `Statistics period: ${day[0]}, ${months[(day[1])]} ` 
     const dayInTheWeek = 7;
+   
     const getActualUsers = ( statisticsByDate, personalData ) => {
         if( statisticsByDate ) {
             return statisticsByDate;
@@ -30,7 +31,6 @@ const userPersonalDataContainer = (props) => {
         }
         return arrUsers;
     };
-
     const listUsers = getActualUsers( statisticsByDate, personalData );
     const dataForSchedule = userDataFormatting( listUsers );
     return <div>

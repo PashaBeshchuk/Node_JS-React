@@ -1,13 +1,60 @@
+.bodyForPageStatistics {
+    display: flex;
+    flex-direction: column;
+    // /position: relative;
+    //margin-bottom: -50px;
+    height: 100vh;
+    //height: 100%;
+    //border: 7px solid red;
+}
+
 .h1 {
     font-family: Montserrat;
         font-style: normal;
         font-weight: bold;
         font-size: 32px;
         margin: 50px 0px 16px 0px;
+        position: relative;
+}
+.personalData,
+.personalData:focus {
+    cursor: pointer;
+}
+.setCountUsers {
+    position: absolute;
+    input {
+        border: 2px solid #3A80BA;
+        background: #FBFBFB;
+        height: 22px;
+        border-radius: 8px;
+        top: 0;
+        left: 1053px;
+        width: 50px;
+        text-align: center;
+    }
+    button {
+        border: 2px solid #3A80BA;
+        height: 26px;
+        border-radius: 8px;
+        top: 0;
+        left: 1117px;
+        position: absolute;
+    }
+    div {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 22px;
+        left: 811px;
+        position: absolute;
+        width: 301px;
+    }
 }
 .blockTable {
     width: 85%;
     margin: auto;
+    //flex-grow: 1;
+
     &__headTable {
         background: #3A80BA;
         color: white;
@@ -33,6 +80,7 @@
     &__trInactive {
         background: #FBFBFB;
     }
+    
 }
 table {
     width: 100%;

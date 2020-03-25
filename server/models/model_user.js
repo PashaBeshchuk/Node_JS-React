@@ -44,9 +44,10 @@ class Users {
     this.setActualUsers(listUsers);
     const usersStatistics = this.getUsersStatisticsPortion(listUsers);
     const generalUserStatistics = this.getGeneralUserStatistics(usersStatistics);
-    this.setActualStatistics(usersStatistics)
+    const fullStatisticsOfUsers = this.allUsersAddMissingDates(usersStatistics);
+    this.setActualStatistics(fullStatisticsOfUsers);
     const listOfUnitedUsers = this.combineUsersData(listUsers, generalUserStatistics);
-    return { listOfUnitedUsers, usersStatistics };
+    return { listOfUnitedUsers, fullStatisticsOfUsers };
   }
 
   getUsersStatisticsPortion(listUsers) {
@@ -79,7 +80,7 @@ class Users {
     }
     return generalUserStatistics;
   }
-  // Get statistic getStatisticsByDate
+  // Get statistic by date
   getStatisticsByDate(startDate, endDate, userId) {
     const validUser = this.validUser(userId);
     if(!validUser) return 'User is not found';
@@ -107,9 +108,57 @@ class Users {
     }
     return listOfUnitedUsers;
   }
+
+  getDaysInAMonth(year, month) {
+    const dateFirst = new Date(year, month, 1);
+    const dateSecond = new Date(year, Number(month)+1, 1);        
+    return Math.round((dateSecond-dateFirst)/1000/3600/24);
+  }
+
+  addMissingDates (arrUsersStatistics) {
+    const arrOfDays = arrUsersStatistics[0].date.split('-');
+    const actualYear = arrOfDays[0];
+    const actualMonth = arrOfDays[1];
+    const daysInAMonth = this.getDaysInAMonth(arrOfDays[0], arrOfDays[1])
+    const fullArrUsersStatistics = arrUsersStatistics.slice();
+    let newFullArrUsersStatistics;
+    for (let i = 1; i <= daysInAMonth; i++) {
+        let dayIsPresent = true;
+        let actualDay = i;
+        if(i < 10){
+            actualDay=`0${i}`;
+        }
+        for ( let j = 0; j < arrUsersStatistics.length; j++ ) {
+            const actualArrOfDays = arrUsersStatistics[j].date.split('-');
+            if(Number(actualDay) === Number(actualArrOfDays[2])) {
+                dayIsPresent = false;
+                break;
+            } 
+        }
+        if(dayIsPresent) {
+            const objDataUser = {
+                user_id: arrUsersStatistics[0].user_id, 
+                date: `${actualYear}-${actualMonth}-${actualDay}`, 
+                page_views: 0, 
+                clicks: 0
+            }
+            fullArrUsersStatistics.unshift(objDataUser);
+        }   
+    }
+    newFullArrUsersStatistics = fullArrUsersStatistics.sort((prev, next) => {
+        return Number(prev.date.split('-')[2]) - Number(next.date.split('-')[2]);
+    })
+    return newFullArrUsersStatistics;
+  }
+  
+  allUsersAddMissingDates(listUsers) {
+    const newUserStatisticsList = [];
+    for ( let i = 0; i < listUsers.length; i++){
+      newUserStatisticsList.push(this.addMissingDates(listUsers[i]));
+    }
+    return newUserStatisticsList;
+  }
 }
 
-
-
-
 module.exports = Users;
+

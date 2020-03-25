@@ -14,7 +14,7 @@ exports.getUserDataPortion = (req, res, next) => {
     res.json({
       saccess: true,
       users: portionUsers.listOfUnitedUsers,
-      usersStatistics: portionUsers.usersStatistics,
+      usersStatistics: portionUsers.fullStatisticsOfUsers,
       countOfUsers: countOfUsers.length,
     });
   };
