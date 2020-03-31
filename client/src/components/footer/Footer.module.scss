@@ -1,0 +1,30 @@
+.footer {
+    width: 100%;
+    height: 57px;
+    background: #1C3B55;
+    color: white;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    box-sizing:border-box;
+    position: relative;
+    &__name {
+        font-size: 24px;
+        position: absolute;
+        left: 7%;
+        top: 50%;
+    }
+    &__text {
+        font-size: 16px;
+        position: absolute;
+        right: 43%;
+        top: 50%;
+    }
+    &__year {
+        font-size: 16px;
+        position: absolute;
+        right: 7%;
+        top: 50%;
+    }
+    
+}
