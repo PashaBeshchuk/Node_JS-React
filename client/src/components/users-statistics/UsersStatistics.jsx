@@ -8,7 +8,7 @@ import Footer from '../footer/Footer';
 
 
 const UsersStatistics = (props) => {
-    const { users, updatePersonalDataAC, usersStatistics, fullName, updateFullNameAC } = { ...props };
+    const { users, updatePersonalDataAC, usersStatistics, fullName, updateFullNameAC, actualUrl } = { ...props };
     const [ redirectToPersonalPage, setRedirect ] = useState( false );
     let trActive = false;
     const goToNewPage = (usersStatistics, users) => {
@@ -42,7 +42,7 @@ const UsersStatistics = (props) => {
                     {listUsers}
                 </tbody>
             </table>
-            <PaginationContainer />
+            <PaginationContainer actualUrl={actualUrl} />
         </div>
         <Footer/>  
     </div> 
@@ -64,22 +64,19 @@ const TableHeader = (props) => {
 
 const SetTheNumberOfUsers = (props) => {
     const {updateCountUsers, getPortionUsersThunk, countPage } = { ...props };
-    const [countUsersOnPage, setCountUsersOnPage] = useState();
-    const sendValue = () => {
-        if(!countUsersOnPage) return 
-        if(Number(countUsersOnPage) > 50) {
-            alert('Maximum number of users 50 people');
-        } else {
-            updateCountUsers(countUsersOnPage);
-            getPortionUsersThunk(countUsersOnPage, countPage);
-            setCountUsersOnPage();
-        }
+    const sendValue = (event) => {
+        updateCountUsers(event.target.value);
+        getPortionUsersThunk(event.target.value, countPage);
     }
 
     return <div className={scss.setCountUsers}>    
         <div>Enter the number of users</div>
-        <input onChange={(event)=> setCountUsersOnPage(event.target.value)} value={countUsersOnPage} type='text'/>
-        <button onClick={sendValue}>Confirm</button>
+        <select onChange={sendValue}>
+            <option>10</option>
+            <option>15</option>
+            <option>25</option>
+            <option>50</option>
+        </select>
     </div>
 } 
 

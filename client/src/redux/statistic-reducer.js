@@ -11,6 +11,7 @@ const UPDATE_FULL_NAME = 'UPDATE-FULL-NAME';
 const UPDATE_COUNT_USERS = 'UPDATE-COUNT-USERS';
 
 
+
 const initialStatistic = {
     users:null,
     countUsers: 10,
@@ -23,7 +24,6 @@ const initialStatistic = {
     statisticsByDate: null,
     months: ['December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November' ],
     fullName: {},
-
 }
 
 const statisticReducer = (state = initialStatistic, action) => {
@@ -35,7 +35,7 @@ const statisticReducer = (state = initialStatistic, action) => {
         case UPDATE_USER_STATISTICS:
             return { ...state, usersStatistics: action.userStatistics };
         case UPDATE_COUNT_PAGE:
-            return { ...state,  countPage: action.numberPage };
+            return { ...state,  countPage: Number(action.numberPage) };
         case UPDATE_STATUS_LOAD:
             return { ...state, load: action.status };
         case UPDATE_PERSONAL_DATA:
@@ -54,7 +54,7 @@ const statisticReducer = (state = initialStatistic, action) => {
 const updateUsersAC = (users) => ({type: UPDATE_USERS, users});
 const updateCountAllUsersAC = (countAllUsers) => ({type: UPDATE_COUNT_ALL_USERS, countAllUsers});
 const updateUserStatisticsAC = (userStatistics) => ({type: UPDATE_USER_STATISTICS, userStatistics});
-const updateCountPageAC = (numberPage) => ({type: UPDATE_COUNT_PAGE, numberPage});
+export const updateCountPageAC = (numberPage) => ({type: UPDATE_COUNT_PAGE, numberPage});
 const updateStatusLoadAC = (status) => ({type: UPDATE_STATUS_LOAD, status});
 const updateStatisticsByDateAC = (statisticsByDate) => ({type: UPDATE_STATISTICS_BY_DATE, statisticsByDate});
 export const updatePersonalDataAC = (personalData) => ({type: UPDATE_PERSONAL_DATA, personalData});

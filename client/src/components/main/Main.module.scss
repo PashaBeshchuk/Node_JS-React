@@ -329,4 +329,23 @@ input {
     top: 46px;
     left: 450px;
     border: 0;
+    width: 371px;
+    height: 43px;
+}
+input:focus {
+    outline: none;
+}
+
+textarea {
+    position: absolute;
+    top: 46px;
+    left: 450px;
+    border: 0;
+    resize: none;
+    width: 371px;
+    height: 43px;
+}
+
+textarea:focus {
+    outline: none;
 }

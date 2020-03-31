@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 import { getPortionUsersThunk, updatePersonalDataAC, updateFullNameAC, updateCountUsers } from '../../redux/statistic-reducer';
 
 const UsersStatisticContainer = (props) => {
-    const { users, countUsers, countPage, getPortionUsersThunk } = { ...props }  
+    const { users, countUsers, countPage, getPortionUsersThunk } = { ...props };
     useEffect(() => {
         if(props.match.params.userId){
-            getPortionUsersThunk(countUsers, props.match.params.userId)
+            getPortionUsersThunk(countUsers, props.match.params.userId);
         }else {
-            getPortionUsersThunk(countUsers, countPage)
+            getPortionUsersThunk(countUsers, countPage);
         }
         
     }, [countPage])
     if (users) {
         return <div>
-            <UsersStatistics {...props} />
+            <UsersStatistics {...props} actualUrl={props.match.params}/>
         </div>
     }
     return <></>

@@ -1,4 +1,4 @@
-import React from 'react';
+    import React from 'react';
 import scss from './Main.module.scss';
 import BlockService from './BlockService';
 import footerImage from './../../images/footer_image.png';
@@ -22,7 +22,8 @@ const MainService = (props) => {
             <div className={scss.blockServices__footer}>
                 <img style={{width:'100%'}} src={footerImage}/>
                 <div className={scss.blockServices__footer__fieldText}></div>
-                <input placeholder={'Enter your email'}/>
+                <input placeholder={'Enter your email'}/> 
+                {/* <textarea placeholder={'Enter your email'}></textarea> */}
                 <button className={scss.blockServices__footer__button}>Subscribe</button>
                 <div className={scss.blockServices__footer__t1}>AppCo</div>
                 <div className={scss.blockServices__footer__t2}>All rights reserved by ThemeTags</div>

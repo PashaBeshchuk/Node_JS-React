@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Pagination from './Pagination';
-import {  getPortionUsersThunk } from '../../redux/statistic-reducer';
+import { updateCountPageAC } from '../../redux/statistic-reducer';
 import { NavLink } from 'react-router-dom';
 import scss from './Pagination.module.scss'
 
 const PaginationContainer = (props) => {
-    const { countAllUsers, countUsers, countPage, getPortionUsersThunk, paginationSize, load } = { ...props };
-
-    const [ countActualPage, setCountActualPage ] = useState(1)
+    const { countAllUsers, countUsers, countPage, paginationSize, load, updateCountPageAC } = { ...props };
+    const [ countActualPage, setCountActualPage ] = useState(1);
     const checkStateComponent = () => {
         if(load){
-            return <div></div>
+            return <div></div>;
         } else {
-            const startPage = countPage / paginationSize
+            const startPage = countPage / paginationSize;
             if ( startPage > 0 ) {
-                setCountActualPage(Math.ceil(startPage))
+                setCountActualPage(Math.ceil(startPage));
             } else {
-                setCountActualPage(Math.floor(startPage))
+                setCountActualPage(Math.floor(startPage));
             }
         }
     }
     
     useEffect( () => {
-        checkStateComponent()
+        checkStateComponent();
     }, [load] )
     const firstPage = ( Number(countActualPage) - 1 ) * paginationSize;
     const lastPage = countActualPage * paginationSize;
@@ -34,22 +33,31 @@ const PaginationContainer = (props) => {
     };
     
     const updateActualUsers = (event) => {
-        getPortionUsersThunk(countUsers, event.target.innerHTML)
+        let number;
+        if( event.target.innerHTML === 'Next' ) {
+            number = countPage + 1;
+        } else if ( event.target.innerHTML === 'Previous' ) {
+            number = countPage - 1;
+        } else {
+            number = Number(event.target.innerHTML);
+        }
+        updateCountPageAC( number );
+        setCountActualPage(Math.ceil(number / 5));
     }
     const actualPages = pages.filter( (page) => {
         if ( page >= firstPage && page <= lastPage ) { 
-            return page
+            return page;
         } 
     })
     const linkForpagonation = actualPages.map((page,key)=>{
-        return <span className={ countPage == page ? `${scss.selectedPage} ${scss.linkButton}` : `${scss.linkButton}`} key={key}>
-            <NavLink exact onClick={updateActualUsers}  to={`/Main/User-Statistics/${page}`}>
-                {page}
-            </NavLink>
-        </span>
+        return <div className={ countPage == page ? `${scss.selectedPage} ${scss.linkButton}` : `${scss.linkButton}`} key={key}>
+                <NavLink exact onClick={updateActualUsers}  to={`/Main/User-Statistics/${page}`}>
+                    <div className={scss.linkButton__buttons}>{ page }</div>
+                </NavLink>
+        </div>
     })
     return <div className={scss.pagination}>
-        <Pagination pageData={ { countActualPage, linkForpagonation, firstPage, endPage, lastPage, setCountActualPage } }/>
+        <Pagination pageData={ { countActualPage, linkForpagonation, firstPage, endPage, lastPage, setCountActualPage, updateActualUsers, countPage } }/>
     </div>    
 };
 
@@ -64,4 +72,4 @@ const mapStateToProps = (state) => {
 };  
 
 
-export default connect(mapStateToProps,{ getPortionUsersThunk })(PaginationContainer);
+export default connect(mapStateToProps,{ updateCountPageAC })(PaginationContainer);

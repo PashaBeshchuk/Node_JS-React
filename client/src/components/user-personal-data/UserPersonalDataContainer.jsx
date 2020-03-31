@@ -7,20 +7,31 @@ import { Redirect } from 'react-router-dom';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 
-
-
 const userPersonalDataContainer = (props) => {
     const { personalData, statisticsByDate, months, fullName } = { ...props };
     if(!personalData) return <Redirect to={'/Main/User-Statistics'} />;
     const day = personalData[0].date.split('-');
     const statisticsPeriod = `Statistics period: ${day[0]}, ${months[(day[1])]} ` 
-    const dayInTheWeek = 7;
-   
+    
     const getActualUsers = ( statisticsByDate, personalData ) => {
+        const actualUsers = [];
         if( statisticsByDate ) {
             return statisticsByDate;
         } else {
-            return personalData.slice( 0, 7 );
+            const dayInTheWeek = 7;
+            let correspondingSevenDays = 0;
+            
+            for (let i = 0; i < personalData.length; i++) {
+                if(correspondingSevenDays < dayInTheWeek) {
+                    if( personalData[i].page_views > 0 || personalData[i].clicks > 0 ) {  
+                        correspondingSevenDays += 1;
+                        actualUsers.push(personalData[i]);
+                    }
+                } else {
+                    return actualUsers;
+                }
+            }
+            return actualUsers;
         }
     }
     const userDataFormatting = ( listUsers ) => {
@@ -31,11 +42,11 @@ const userPersonalDataContainer = (props) => {
         }
         return arrUsers;
     };
-    const listUsers = getActualUsers( statisticsByDate, personalData );
-    const dataForSchedule = userDataFormatting( listUsers );
+    const listUsersDate = getActualUsers( statisticsByDate, personalData );
+    const dataForSchedule = userDataFormatting( listUsersDate );
     return <div>
         <Header/>
-        <DateFilter {...props} />
+        <DateFilter {...props} listUsersDate={listUsersDate} />
         <UserPersonalData personalData={dataForSchedule}  statisticsPeriod={statisticsPeriod} fullName={fullName}/>
         <Footer/>
     </div>

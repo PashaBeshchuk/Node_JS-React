@@ -3,55 +3,80 @@ import scss from './UserPersonalData.module.scss'
 
 const DateFilter = ( props ) => {
     const filterData = {};
-    const originalDates = { from: '', to:'' };
-    const { personalData, getStatisticsByDateThunk } = { ...props };
-    
-    const listOfDaysForFrom = personalData.map( (userData, id) => {
-        if( id === 0 ) {
-            originalDates.from = userData.date
+    const { personalData, getStatisticsByDateThunk, listUsersDate } = { ...props };
+    const [dataFilterFrom, setDataFilterFrom] = useState(false);
+    const [dataFilterTo, setDataFilterTo] = useState(false);
+    const dateSeparationForFrom = (listUsersDate, personalData) => {
+        const lastDay = listUsersDate[listUsersDate.length-1]
+        const arrDate = []
+        for ( let i = 0; i < personalData.length; i++ ) {
+           if(lastDay.date > personalData[i].date) {
+                arrDate.push(personalData[i])
+           }
+        }
+        return arrDate
+    }
+    const dateSeparationForTo = (listUsersDate, personalData) => {
+        const firstDay = listUsersDate[0]
+        const arrDate = []
+        for ( let i = 0; i < personalData.length; i++ ) {
+           if( firstDay.date < personalData[i].date ) {
+                arrDate.push(personalData[i])
+           }
+        }
+        return arrDate
+    }
+
+    const listDateForFrom = dateSeparationForFrom(listUsersDate, personalData)
+    const listDateForTo = dateSeparationForTo(listUsersDate, personalData)
+    const listOfDaysForFrom = listDateForFrom.map(( userData, id ) => {
+        if(!dataFilterFrom) {
+            if(userData.date == listUsersDate[0].date) {
+                setDataFilterFrom(userData.date)
+            }
         }
         return <option key={id} value={userData.date}>{userData.date}</option>
-    } )
-    const listOfDaysForTo = personalData.map( (userData, id) => {
-        if( id === 6 ) {
-            originalDates.to = userData.date
+    })
+    const listOfDaysForTo = listDateForTo.map(( userData, id ) => {
+        if(!dataFilterTo) {
+            if(userData.date == listUsersDate[listUsersDate.length-1].date) {
+                setDataFilterTo(userData.date)
+            }
         }
+        
         return <option key={id} value={userData.date}>{userData.date}</option>
-    } )
-    const [dataFilterFrom, setDataFilterFrom] = useState(originalDates.from);
-    const [dataFilterTo, setDataFilterTo] = useState(originalDates.to);
+    })
+
     filterData.userId = personalData[0].user_id;
-    const requestData = () =>{
-        if (dataFilterFrom > dataFilterTo) {
-            alert('Invalid date range! Please, check for correctness.');
-            //Alternative solution
-            // const filterClone = Object.assign({}, filterData);
-            // filterData.to = filterClone.from
-            // filterData.from = filterClone.to
-            // getStatisticsByDateThunk(filterData)
-        } else {
+    const requestData = () => {
+        if(!!dataFilterFrom && !!dataFilterTo) {
             filterData.from = dataFilterFrom
-            filterData.to = dataFilterTo
+            filterData.to = dataFilterTo    
             getStatisticsByDateThunk(filterData)
         }
+       
     }
     return <div className={scss.dateFilter}>
         <div className={scss.dateFilter__from}>
-            <b>From</b>
-            <select defaultValue={ originalDates.from } onClick={(event)=> setDataFilterFrom(event.target.value)}>
+            <b>From </b>
+            <select value={ dataFilterFrom } 
+                onChange={(event)=> setDataFilterFrom(event.target.value)}
+                onClick={requestData}>
+
                 {listOfDaysForFrom}
             </select>
         </div>
         <div className={scss.dateFilter__to}>
-            <b>To</b>
-            <select defaultValue={ originalDates.to } onClick={(event)=> setDataFilterTo(event.target.value)}>
+            <b>To </b>
+            <select value={ dataFilterTo } 
+                onChange={(event)=> setDataFilterTo(event.target.value)}
+                onClick={requestData}>
+
                 {listOfDaysForTo}
             </select>
         </div>
-        <button className={scss.dateFilter__button} onClick={requestData}>Confirm</button>
     </div>
 }
-
 
 
 export default DateFilter;

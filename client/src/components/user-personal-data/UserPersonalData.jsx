@@ -8,7 +8,7 @@ import {
     ResponsiveContainer,
   } from 'recharts';
 
-const userPersonalData = (props) => { 
+const userPersonalData = (props) => {
     return <div>
         <div style={{ maxWidth:'800px', margin:'0px auto', height: '250px'}}>
             <div className={scss.fullName}> { props.statisticsPeriod } {` ${props.fullName.name} ${props.fullName.surname}`}</div>

@@ -21,16 +21,20 @@
     cursor: pointer;
 }
 .setCountUsers {
-    position: absolute;
-    input {
+    select {
         border: 2px solid #3A80BA;
-        background: #FBFBFB;
-        height: 22px;
         border-radius: 8px;
+        background: #FBFBFB;
+        height: 26px;
         top: 0;
-        left: 1053px;
+        //left: 1053px;
+        right: 1%;
         width: 50px;
-        text-align: center;
+        text-align: center; 
+        position: absolute;
+        & optional {
+            text-align: center;
+        }  
     }
     button {
         border: 2px solid #3A80BA;
@@ -45,7 +49,8 @@
         font-style: normal;
         font-weight: normal;
         font-size: 22px;
-        left: 811px;
+        //left: 811px;
+        right: 1%;
         position: absolute;
         width: 301px;
     }

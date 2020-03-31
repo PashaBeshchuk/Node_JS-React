@@ -1,15 +1,19 @@
 .pagination {
     text-align: center;
     margin-top: 24px;
+    &__buttons {
+        display: flex;
+		width: 398px;
+		margin: 0 auto;
+    }
 }
 
 .linkButton {
     background-color: #E5E5E5;  
     border: 2px solid #F1F1F1;
-    margin: 0px 0px 0px 8px;
-    width: 0px;
-    height: 0px;
-    padding: 9px 12px 9px 12px;
+    margin: 0px 0px 0px 11px;
+    width: 30px;
+	height: 37px;
     border-radius: 4px;
     font-family: Montserrat;
     font-style: normal;
@@ -17,6 +21,9 @@
     font-size: 16px;
     color: white;
     text-decoration: none;
+    &__buttons {
+        padding-top: 9px;
+    }
 }
 .selectedPage {
     background-color: #3A80BA;
@@ -41,7 +48,9 @@
     margin-left: 10px;
     height: 38px;
     border-radius: 4px;
-
+    & > a {
+        text-decoration: none;
+    }
 }
 .buttonPrev {
     background-color: #3A80BA;
@@ -49,5 +58,14 @@
     color: white;
     height: 38px;
     border-radius: 4px;
+    & > a {
+        text-decoration: none;
+    }
+}
+
+.textForButton {
+    padding-top: 6px;
+    height: 87%;
+    color: white;
 }
 
