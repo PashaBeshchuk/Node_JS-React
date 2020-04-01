@@ -158,6 +158,34 @@ class Users {
     }
     return newUserStatisticsList;
   }
+
+  getUserAllDataByName(name, surname) {
+    const userData = this.getUserDataByName(name, surname);
+    const userStatistic = [];
+    userStatistic.push(this.getUserStatisticByName(userData.id));
+    const fullUserStatistic = this.allUsersAddMissingDates(userStatistic);
+    return fullUserStatistic;
+  }
+
+  getUserDataByName(name, surname) {
+    const allUsers = this.getAllUsers();
+    for ( let i = 0; i < allUsers.length; i++ ) {
+      if(name === allUsers[i].first_name && surname === allUsers[i].last_name) {
+        return allUsers[i]
+      }
+    }  
+  }
+
+  getUserStatisticByName (id) {
+    const allUsersStatistics = this.getStatisticAllUsers();
+    const userStatistic = [];
+    for ( let i = 0; i < allUsersStatistics.length; i++ ) {
+      if(id === allUsersStatistics[i].user_id) {
+        userStatistic.push(allUsersStatistics[i]);
+      }
+    }
+    return userStatistic
+  }
 }
 
 module.exports = Users;

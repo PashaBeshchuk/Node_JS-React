@@ -14,7 +14,7 @@ function App(props) {
         <Switch>             
           <Route exact path='/Main' render={()=><Main/>}/>
           <Route exact path='/Main/User-Statistics/:userId?' render={(history)=><UsersStatisticsContainer {...history}/>}/>
-          <Route exact path='/Main/User-Statistic/:userName?' render={()=><UserPersonalDataContainer/>}/>
+          <Route exact path='/Main/User-Statistic/:userName?' render={(history)=><UserPersonalDataContainer {...history}/>}/>
         </Switch>
       </div>
     </div>
