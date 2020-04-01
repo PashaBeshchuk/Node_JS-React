@@ -24,6 +24,7 @@ const UserPersonalDataContainer = (props) => {
         const day = personalData[0].date.split('-');
         const statisticsPeriod = `Statistics period: ${day[0]}, ${months[(day[1])]} `
         
+        
         const getActualUsers = ( statisticsByDate, personalData ) => {
             const actualUsers = [];
             if( statisticsByDate ) {
