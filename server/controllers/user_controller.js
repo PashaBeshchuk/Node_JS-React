@@ -6,11 +6,11 @@ exports.viewFile = (req, res) => {
 }
 
 exports.getUserDataPortion = (req, res, next) => {
-  if (!res) return next('Нет ответа сервера');
+  if (!res) return next('Server is not responding');
   if (res) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     const portionUsers = users.getUsersPortion(req.params.portionUsers, req.params.countUsers);
-    const countOfUsers = users.getAllUsers()
+    const countOfUsers = users.getAllUsers();
     res.json({
       saccess: true,
       users: portionUsers.listOfUnitedUsers,
@@ -21,7 +21,7 @@ exports.getUserDataPortion = (req, res, next) => {
 };
 
 exports.getStatisticsByDate = (req, res, next) => {
-  if (!res) return next('Нет ответа сервера');
+  if (!res) return next('Server is not responding');
   if (res) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     const portionUserStatistic = users.getStatisticsByDate(req.params.dateBefore, req.params.dateAfter, req.params.userId);
@@ -29,3 +29,12 @@ exports.getStatisticsByDate = (req, res, next) => {
   };
 }
 
+exports.getStatisticsByName = (req, res, next) => {
+  if(!res) return next('Server is not responding');
+  if(res) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    const arrUserStatistic = users.getUserAllDataByName(req.params.name, req.params.surname);
+    const userStatistic = arrUserStatistic[0]
+    res.json({ saccess: true, userStatistic });
+  };
+}

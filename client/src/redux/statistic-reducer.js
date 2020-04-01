@@ -79,5 +79,12 @@ export const getStatisticsByDateThunk = (filterData) => {
     }
 }
 
+export const getStatisticsByNameThunk = (name, surname) => {
+    return async (dispatch) => {
+        const statisticsByName = await apiUserStatistics.getStatisticsByName(name, surname);
+        dispatch(updatePersonalDataAC(statisticsByName.data.userStatistic))
+    }
+}
+
 export default statisticReducer;
 

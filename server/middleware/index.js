@@ -17,17 +17,4 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(routers);
 
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('X-Requested-With', 'XMLHttpRequest');
-//     res.header('Access-Control-Allow-Headers', 
-//     'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//     if(res.method === 'OPTIONS') {
-//         res.header('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE');
-//         return res.status(200).json({});
-//     }
-//     next();
-// });
-
-
 module.exports = app;

@@ -6,6 +6,9 @@ const apiUserStatistics = {
     },
     getStatisticsByDate(filterData){
         return instance.get(`dateBefore=${filterData.from}&dateAfter=${filterData.to}&userId=${filterData.userId}`);
+    },
+    getStatisticsByName(name, surname) {
+        return instance.get(`name=${name}&surname=${surname}`)
     }
 }
 
