@@ -4,8 +4,8 @@ import scss from './UserPersonalData.module.scss'
 const DateFilter = ( props ) => {
     const filterData = {};
     const { personalData, getStatisticsByDateThunk, listUsersDate } = { ...props };
-    const [dataFilterFrom, setDataFilterFrom] = useState(false);
-    const [dataFilterTo, setDataFilterTo] = useState(false);
+    const [dataFilterFrom, setDataFilterFrom] = useState(null);
+    const [dataFilterTo, setDataFilterTo] = useState(null);
     const dateSeparationForFrom = (listUsersDate, personalData) => {
         const lastDay = listUsersDate[listUsersDate.length-1]
         const arrDate = []
