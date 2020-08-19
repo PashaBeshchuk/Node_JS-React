@@ -1,18 +1,22 @@
 import React from 'react';
-import MainCategories from './MainCategories';
-import MainHeader from './MainHeader';
-import MainStartApps from './MainStartApps';
-import MainService from './MainService';
+
+import MainServiceСopy from './MainServiceСopy';
+import MainHeaderCopy from './MainHeaderCopy';
+import MainCategoriesCopy from './MainCategoriesCopy';
+import MainStartAppsCopy from './MainStartAppsCopy';
+import Footer from './Footer';
 
 
 
 
 const Main = (props) => {
     return <div>
-        <MainHeader/>
-        <MainCategories/>
-        <MainStartApps/>
-        <MainService/>
+        <MainHeaderCopy/>
+        <MainCategoriesCopy/>
+        <MainStartAppsCopy/>
+        <MainServiceСopy/>
+        <Footer/>
+
     </div>
 };
 
